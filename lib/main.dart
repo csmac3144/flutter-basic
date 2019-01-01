@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'dart:math';
+import 'form.dart';
 
 void main() => runApp(MaterialApp(
       home: BasicApp(),
@@ -12,7 +13,7 @@ class BasicApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Directionality(
         textDirection: TextDirection.ltr,
-        child: Material(child: BasicStatefulWidget()),
+        child: BasicStatefulWidget(),
       );
 }
 
@@ -33,11 +34,12 @@ class _BasicState extends State<BasicStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
+    return Material(
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
           Text(
             "Katie loves Christmas cake!",
           ),
@@ -57,7 +59,28 @@ class _BasicState extends State<BasicStatefulWidget> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => BasicFirstPage()));
               })
-        ]);
+        ]));
+  }
+}
+
+class BasicInputPage extends StatefulWidget {
+  @override
+  BasicInputPageState createState() {
+    return new BasicInputPageState();
+  }
+}
+
+class BasicInputPageState extends State<BasicInputPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+          BasicForm(),
+        ]));
   }
 }
 
@@ -94,6 +117,13 @@ class BasicFirstPage extends StatelessWidget {
             onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => BasicSecondPage()));
+            },
+          ),
+          PlatformButton(
+            child: Text("Goto Form"),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => BasicInputPage()));
             },
           ),
           PlatformButton(
